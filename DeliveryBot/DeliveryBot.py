@@ -28,7 +28,6 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def bot_message(message):
     if message.text == 'Зарегистрироваться':
-#        user_data = [message.from_user.id,message.from_user.first_name,message.from_user.last_name]
         if not db.check_id(message.from_user.id):
             db.register(message.from_user.id,message.from_user.first_name,message.from_user.last_name)
             bot.send_message(message.chat.id, 'Вы успешно зарегистрированы', reply_markup=main_menu())
@@ -114,6 +113,8 @@ def check_callback_data(callback):
 
         bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text='Выбирай мудро!', reply_markup=markup)
 
+#    elif callback.data in :
+#        pass
 
 
 
