@@ -56,52 +56,46 @@ def bot_message(message):
 @bot.callback_query_handler(func= lambda callback: callback.data)
 def check_callback_data(callback):
     if callback.data == 'Супы':
-        soups = db.choise_soup()
+        list_of_dishes = db.choise_soup()
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton(text=f"{soups[0][0]} {soups[0][1]} €", callback_data=soups[0][0])
-        item2 = types.InlineKeyboardButton(text=f"{soups[1][0]} {soups[1][1]} €", callback_data='soup_2')
-        item3 = types.InlineKeyboardButton(text=f"{soups[2][0]} {soups[2][1]} €", callback_data='soup_3')
-        item4 = types.InlineKeyboardButton(text=f"{soups[3][0]} {soups[3][1]} €", callback_data='soup_4')
+        items = [types.InlineKeyboardButton(text=f"{list_of_dishes[i][0]} {list_of_dishes[i][1]} €", callback_data=list_of_dishes[i][0]) for i in range(4)]
         item5 = types.InlineKeyboardButton(text='Меню', callback_data='Меню')
-        markup.add(item1, item2, item3, item4, item5)
+        markup.add(*items, item5)
 
         bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text='Выбирай мудро!', reply_markup=markup)
+
     elif callback.data == 'Горячее':
-        main_dish = db.choise_main_dish()
+        list_of_dishes = db.choise_main_dish()
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton(text=f"{main_dish[0][0]} {main_dish[0][1]} €", callback_data='main_dish_1')
-        item2 = types.InlineKeyboardButton(text=f"{main_dish[1][0]} {main_dish[1][1]} €", callback_data='main_dish_2')
-        item3 = types.InlineKeyboardButton(text=f"{main_dish[2][0]} {main_dish[2][1]} €", callback_data='main_dish_3')
-        item4 = types.InlineKeyboardButton(text=f"{main_dish[3][0]} {main_dish[3][1]} €", callback_data='main_dish_4')
+        items = [types.InlineKeyboardButton(text=f"{list_of_dishes[i][0]} {list_of_dishes[i][1]} €",
+                                            callback_data=list_of_dishes[i][0]) for i in range(4)]
         item5 = types.InlineKeyboardButton(text='Меню', callback_data='Меню')
-        markup.add(item1, item2, item3, item4, item5)
+        markup.add(*items, item5)
 
         bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text='Выбирай мудро!', reply_markup=markup)
+
     elif callback.data == 'Салаты':
-        salads = db.choise_salad()
+        list_of_dishes = db.choise_salad()
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton(text=f"{salads[0][0]} {salads[0][1]} €", callback_data='salad_1')
-        item2 = types.InlineKeyboardButton(text=f"{salads[1][0]} {salads[1][1]} €", callback_data='salad_2')
-        item3 = types.InlineKeyboardButton(text=f"{salads[2][0]} {salads[2][1]} €", callback_data='salad_3')
-        item4 = types.InlineKeyboardButton(text=f"{salads[3][0]} {salads[3][1]} €", callback_data='salad_4')
+        items = [types.InlineKeyboardButton(text=f"{list_of_dishes[i][0]} {list_of_dishes[i][1]} €",
+                                            callback_data=list_of_dishes[i][0]) for i in range(4)]
         item5 = types.InlineKeyboardButton(text='Меню', callback_data='Меню')
-        markup.add(item1, item2, item3, item4, item5)
+        markup.add(*items, item5)
 
         bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text='Выбирай мудро!',
                               reply_markup=markup)
 
     elif callback.data == 'Напитки':
-        drink = db.choise_drink()
+        list_of_dishes = db.choise_drink()
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton(text=f"{drink[0][0]} {drink[0][1]} €", callback_data='drink_1')
-        item2 = types.InlineKeyboardButton(text=f"{drink[1][0]} {drink[1][1]} €", callback_data='drink_2')
-        item3 = types.InlineKeyboardButton(text=f"{drink[2][0]} {drink[2][1]} €", callback_data='drink_3')
-        item4 = types.InlineKeyboardButton(text=f"{drink[3][0]} {drink[3][1]} €", callback_data='drink_4')
+        items = [types.InlineKeyboardButton(text=f"{list_of_dishes[i][0]} {list_of_dishes[i][1]} €",
+                                            callback_data=list_of_dishes[i][0]) for i in range(4)]
         item5 = types.InlineKeyboardButton(text='Меню', callback_data='Меню')
-        markup.add(item1, item2, item3, item4, item5)
+        markup.add(*items, item5)
 
         bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.id, text='Выбирай мудро!',
                               reply_markup=markup)
+
     elif callback.data == 'Меню':
         markup = types.InlineKeyboardMarkup(row_width=1)
         item1 = types.InlineKeyboardButton(text='Супы', callback_data='Супы')
